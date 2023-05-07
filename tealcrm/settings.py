@@ -32,6 +32,12 @@ LOGIN_REDIRECT_URL = '/dashboard/'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'index'
 
+DB_HOST='172.16.136.24'
+DB_PORT='30000'
+DB_NAME='mydatabase'
+DB_USER='root'
+DB_PASSWORD='Vipul*20'
+
 # Application definition
 
 INSTALLED_APPS = [
