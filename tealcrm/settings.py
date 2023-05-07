@@ -90,7 +90,7 @@ DATABASES = {
     #     # 'NAME': BASE_DIR / 'db.sqlite3',
     #     'NAME': 'mydatabase',
     #     'USER': 'root',
-    #     'PASSWORD': 'subham123',
+    #     'PASSWORD': 'Vipul*20',
     #     'HOST': 'localhost',
     #     'PORT': '3306'
     # },
