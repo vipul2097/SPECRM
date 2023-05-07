@@ -6,7 +6,7 @@ services:
     container_name: spemajorproject
     environment:
       - DB_HOST=172.16.136.24
-      - DB_PORT=30000
+      - DB_PORT=3306
       - DB_NAME=mydatabase
       - DB_USER=root
       - DB_PASSWORD=Vipul*20
@@ -19,7 +19,7 @@ services:
   mydb:
     image: mysql:8.0.33
     ports:
-      - "30000:3306"
+      - "3306:3306"
     environment:
       #These environment variables are to be not included in the Settings.py file of Django.
       MYSQL_ROOT_PASSWORD: Vipul*20  
