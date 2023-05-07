@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-k(hp&l!g==^8y9l49i(6i9g1n4ven2s0o_uhq^uxf30iub89j=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGIN_URL = 'login'
@@ -85,13 +85,22 @@ WSGI_APPLICATION = 'tealcrm.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     # 'NAME': BASE_DIR / 'db.sqlite3',
+    #     'NAME': 'mydatabase',
+    #     'USER': 'root',
+    #     'PASSWORD': 'subham123',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306'
+    # },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get('DB_NAME'),
-        'HOST': os.environ.get('DB_HOST'), 
-        'PORT': os.environ.get('DB_PORT'),        
-        'USER': os.environ.get('DB_USER'),       
+        'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT')
     }
 }
 

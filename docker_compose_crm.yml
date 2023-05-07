@@ -5,29 +5,29 @@ services:
     image: vipul2097/spemajorproject
     container_name: spemajorproject
     environment:
-      - DB_HOST=172.16.136.24
+      - DB_HOST=mydb2
       - DB_PORT=3306
       - DB_NAME=mydatabase
       - DB_USER=root
-      - DB_PASSWORD=Vipul*20
+      - DB_PASSWORD=root
     ports:
       - "8000:8000"
     depends_on:
-      - mydb
+      - mydb2
     entrypoint: ["./wait.sh"]
 
-  mydb:
+  mydb2:
     image: mysql:8.0.33
     ports:
-      - "3306:3306"
+      - "3308:3306"
     environment:
       #These environment variables are to be not included in the Settings.py file of Django.
-      MYSQL_ROOT_PASSWORD: Vipul*20  
+      MYSQL_ROOT_PASSWORD: root 
       MYSQL_DATABASE: mydatabase
     # This will create the database spemajorproject here if it not exists.
     volumes:
-      - mydb_data:/var/lib/mysql
+      - vipul_db_CRM:/var/lib/mysql
 
 # Creating a volume named mydb_data and store the data of the MYSQL running in the container by doing the mapping.
 volumes:
-  mydb_data:
+  vipul_db_CRM:
