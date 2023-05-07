@@ -14,17 +14,11 @@ pipeline {
             steps {
                 // Get code from a GitHub repository
                 // Make sure to add your own git url and credentialsId
-				git branch: 'master', url: 'https://github.com/vipul2097/SPEMiniProject.git',
+				git branch: 'master', url: 'https://github.com/vipul2097/SPECRM.git',
                 credentialsId: 'githubid'
             }
         }
-        stage('Maven Build') {
-            steps {
-                // Maven build, 'sh' specifies it is a shell command
-                sh 'mvn clean install'
-            }
-        }
-
+        
         stage('Build Docker Images') {
             steps {
                sh 'docker build -t vipul2097/mini_dockerimage:latest .'
