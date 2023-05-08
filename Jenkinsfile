@@ -1,39 +1,56 @@
 pipeline {
-    // The “agent” section configures on which nodes the pipeline can be run.
-    // Specifying “agent any” means that Jenkins will run the job on any of the
-    // available nodes.
-
-	agent any
-
     environment{
-      registryCredentials='dockerhub'
+        dockerimg = ''
+        DB_NAME = "mydatabase"
+        DB_HOST = "127.0.0.1"
+        DB_PORT = "3306"
+        DB_USER = "root"
+        DB_PASSWORD = "Vipul*20"
     }
-
+    
+    agent any
+    
     stages {
         stage('Git Pull') {
             steps {
-                // Get code from a GitHub repository
-                // Make sure to add your own git url and credentialsId
-				git branch: 'master', url: 'https://github.com/vipul2097/SPECRM.git',
+                echo 'Git Pull'
+                git branch: 'main', url: 'https://github.com/vipul2097/SPECRM.git',
                 credentialsId: 'githubid'
             }
         }
-        
-        stage('Build Docker Images') {
+        stage('Install Dependencies in the Jenkins Workspace..') {
             steps {
-               sh 'docker build -t vipul2097/mini_dockerimage:latest .'
+                echo 'Installing Dependencies'
+                sh 'pip3 install django mysqlclient '
             }
         }
-
-        stage('Publish Docker Images') {
+        stage('Test and Build') {
             steps {
-               withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
-               sh 'docker push vipul2097/mini_dockerimage:latest'
-              }
+                echo 'We dont need to Build our code. Just do the Model testing.'
+                sh 'python3 manage.py test client.tests'
+                // sh 'python3 manage.py test lead.tests'
+                // sh 'python3 manage.py test team.tests'
+                // sh 'python3 manage.py test userprofile.tests'
             }
-         }
-
-         stage('Clean Docker Images') {
+        }
+        stage('Docker Build Image..') {
+            steps {
+                 script {
+                     echo 'Docker Build Image.'
+                     dockerimg = docker.build("vipul2097/spemajorproject")
+                }
+            }
+        }
+        stage('Push Django Docker Image') {
+            steps {
+                script{
+                    docker.withRegistry('','dockerhub'){
+                    dockerimg.push()
+                    }
+                }
+            }
+        }
+        stage('Clean Docker Images') {
             steps{
             sh '''
                # Remove all images with the tag <none>
@@ -41,11 +58,6 @@ pipeline {
             '''
             }
          }
-
-         stage('Ansible Deploy'){
-            steps{
-              ansiblePlaybook colorized:true, disableHostKeyChecking:true, installation:'Ansible', inventory:'Inventory', playbook:'playbook.yml'
-            }
-         }
+        
     }
 }
