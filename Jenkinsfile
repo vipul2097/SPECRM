@@ -28,9 +28,9 @@ pipeline {
             steps {
                 echo 'We dont need to Build our code. Just do the Model testing.'
                 sh 'python3 manage.py test client.tests'
-                // sh 'python3 manage.py test lead.tests'
-                // sh 'python3 manage.py test team.tests'
-                // sh 'python3 manage.py test userprofile.tests'
+                sh 'python3 manage.py test lead.tests'
+                sh 'python3 manage.py test team.tests'
+                sh 'python3 manage.py test userprofile.tests'
             }
         }
         stage('Docker Build Image..') {
