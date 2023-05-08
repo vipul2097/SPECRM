@@ -15,7 +15,7 @@ services:
     depends_on:
       - mydb2
     entrypoint: ["./wait.sh"]
-    volume:
+    volumes:
       - logs:/app/logs
       - ./logs:/app/logs/host
 
@@ -34,8 +34,8 @@ services:
 # Creating a volume named mydb_data and store the data of the MYSQL running in the container by doing the mapping.
 volumes:
   vipul_db_CRM:
+  logs:
 
 # Define the logs volume outside of the services section.
-volume:
-  logs:
+
 
