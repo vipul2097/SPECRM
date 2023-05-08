@@ -7,6 +7,6 @@
         src: ./docker_compose_crm.yml
         dest: ./
     - name:  docker-compose down
-      command: docker-compose down
+      command: docker-compose -f docker_compose_crm.yml down
     - name: run docker-compose file
-      command: docker-compose up -d
+      command: docker-compose -f docker_compose_crm.yml up -d
