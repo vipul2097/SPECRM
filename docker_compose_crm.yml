@@ -15,6 +15,8 @@ services:
     depends_on:
       - mydb2
     entrypoint: ["./wait.sh"]
+    volumes:
+      - crm_logs:/app
 
   mydb2:
     image: mysql:8.0.33
@@ -31,3 +33,4 @@ services:
 # Creating a volume named mydb_data and store the data of the MYSQL running in the container by doing the mapping.
 volumes:
   vipul_db_CRM:
+  crm_logs:
