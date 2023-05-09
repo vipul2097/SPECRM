@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from logging import Formatter, Handler
 from pathlib import Path
 import os
 
@@ -156,11 +157,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'json': {
+            'format': '{"level": "%(levelname)s", "timestamp": "%(asctime)s", "message": "%(message)s"}',
+            'datefmt': '%Y-%m-%dT%H:%M:%S%z',
+        },
+    },
     'handlers': {
         'file': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename':'django.log',
+            'filename': 'django.log',
+            'formatter': 'json'
         },
     },
     'loggers': {
