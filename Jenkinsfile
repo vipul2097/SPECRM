@@ -65,10 +65,12 @@ pipeline {
         }
         stage('Clean Docker Images') {
             steps{
-            sh '''
-               # Remove all images with the tag <none>
-               docker rmi --force $(docker images | grep "<none>" | awk '{print $3}')
-            '''
+            // sh '''
+            //    # Remove all images with the tag <none>
+            //    docker rmi --force $(docker images | grep "<none>" | awk '{print $3}')
+            // '''
+            sh 'docker image prune --force'
+
             }
          }
          stage('Ansible Deploy'){
