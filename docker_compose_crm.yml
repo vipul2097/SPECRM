@@ -30,7 +30,44 @@ services:
     volumes:
       - vipul_db_CRM:/var/lib/mysql
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      discovery.type: single-node
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.8.0
+    ports:
+      - 5601:5601
+    links:
+      - elasticsearch
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.8.0
+    volumes:
+      - filebeat.yml:/app/filebeat.yml:ro
+      - crm_logs:/app
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    links:
+      - kibana
+      - elasticsearch
+    depends_on:
+      - elasticsearch
+
+networks:
+  efk:
+    driver: bridge
+
 # Creating a volume named mydb_data and store the data of the MYSQL running in the container by doing the mapping.
 volumes:
   vipul_db_CRM:
   crm_logs:
+  filebeat.yml: 
+    driver: local

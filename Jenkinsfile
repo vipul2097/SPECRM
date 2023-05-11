@@ -50,6 +50,19 @@ pipeline {
                 }
             }
         }
+        stage('Delete Docker Containers') {
+            steps {
+                script{
+                    // here we are checking if there are any containers running in our system if so then delete them.
+                    def running_containers = sh (returnStdout: true, script: 'docker ps -q').trim()
+                    if (running_containers) {
+                        sh 'docker rm -f $(docker ps -aq)'
+                    }
+                    
+                    sh 'docker image rm -f vipul2097/spemajorproject'
+                }
+            }
+        }
         stage('Clean Docker Images') {
             steps{
             sh '''
@@ -58,7 +71,7 @@ pipeline {
             '''
             }
          }
-          stage('Ansible Deploy'){
+         stage('Ansible Deploy'){
             steps{
               ansiblePlaybook colorized:true, disableHostKeyChecking:true, installation:'Ansible', inventory:'Inventory', playbook:'playbook.yml'
             }
