@@ -14,6 +14,8 @@ WORKDIR $DockerHOME
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1 
 
+RUN mkdir -p crm_logs
+
 # install dependencies  
 RUN pip install --upgrade pip  
 
