@@ -17,6 +17,8 @@ services:
     entrypoint: ["./wait.sh"]
     volumes:
       - crm_logs:/app
+    networks:
+      - efk
 
   mydb2:
     image: mysql:8.0.33
@@ -29,6 +31,8 @@ services:
     # This will create the database spemajorproject here if it not exists.
     volumes:
       - vipul_db_CRM:/var/lib/mysql
+    networks:
+      - efk
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
@@ -38,6 +42,8 @@ services:
       - 9300:9300
     environment:
       discovery.type: single-node
+    networks:
+      - efk
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.8.0
@@ -47,11 +53,13 @@ services:
       - elasticsearch
     depends_on:
       - elasticsearch
+    networks:
+      - efk
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:7.8.0
     volumes:
-      - filebeat.yml:/app/filebeat.yml:ro
+      - filebeat.yml:/filebeat.yml:ro
       - crm_logs:/app
     environment:
       ELASTICSEARCH_URL: http://elasticsearch:9200
@@ -60,6 +68,8 @@ services:
       - elasticsearch
     depends_on:
       - elasticsearch
+    networks:
+      - efk
 
 networks:
   efk:
