@@ -36,5 +36,3 @@ RUN pip install -r requirements.txt
 COPY wait.sh $DockerHOME/wait.sh
 RUN chmod +x $DockerHOME/wait.sh
 
-# Set permission for logs directory
-RUN chmod -R 777 /app/crm_logs
