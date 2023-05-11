@@ -2,7 +2,7 @@ filebeat.inputs:
 - type: log
   enabled: true
   paths:
-    - /app/*.log
+    -*.log
     
   multiline.pattern: '^\['
   multiline.negate: true
