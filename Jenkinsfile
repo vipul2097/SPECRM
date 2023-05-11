@@ -50,7 +50,7 @@ pipeline {
                 }
             }
         }
-        stage('Delete Docker Containers') {
+        stage('Delete Docker Containers and Existing Image') {
             steps {
                 script{
                     // here we are checking if there are any containers running in our system if so then delete them.
