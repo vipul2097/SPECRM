@@ -12,3 +12,4 @@
 {"level": "INFO", "timestamp": "2023-05-09T08:46:47+0000", "message": ""GET / HTTP/1.1" 200 896"}
 {"level": "INFO", "timestamp": "2023-05-09T09:03:26+0000", "message": "/home/vipul/SPE Project/tealcrm/settings.py changed, reloading."}
 {"level": "INFO", "timestamp": "2023-05-09T09:07:02+0000", "message": "Watching for file changes with StatReloader"}
+{"level": "INFO", "timestamp": "2023-05-11T05:09:56+0000", "message": "Watching for file changes with StatReloader"}
