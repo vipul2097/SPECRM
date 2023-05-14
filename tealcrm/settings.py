@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-"Commenting for ngrok"
+"Commenting for git poll scm through ngrok"
 
 from logging import Formatter, Handler
 from pathlib import Path
